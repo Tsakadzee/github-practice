@@ -1,3 +1,5 @@
+- name: Force fail
+run: exit 1 
 name: PR Check
 
 on:
