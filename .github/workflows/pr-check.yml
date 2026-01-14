@@ -1,0 +1,29 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Basic checks
+        run: |
+          echo "Running PR checks..."
+          test -f notes.txt
+          echo "notes.txt exists ✅"
+
+      - name: Ensure .env is not tracked
+        run: |
+          if git ls-files --error-unmatch .env > /dev/null 2>&1; then
+            echo ".env is tracked in git ❌ (remove it from the repo)"
+            exit 1
+          else
+            echo ".env is not tracked ✅"
+          fi
