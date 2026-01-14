@@ -6,6 +6,9 @@ on:
       - main
 
 jobs:
+pr-check:
+name: PR Check
+runs-on: ubuntu-latest
   verify:
     runs-on: ubuntu-latest
 
